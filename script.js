@@ -1,107 +1,404 @@
+// =========================================
+// REALISTIC ROSE GARDEN
+// Advanced Animation System
+// =========================================
+
 const particlesContainer = document.getElementById("particles");
-const flowers = document.querySelectorAll(".flower");
+const bloomBtn = document.getElementById("bloomBtn");
+const nightBtn = document.getElementById("nightBtn");
+const scene = document.querySelector(".scene");
 const roses = document.querySelectorAll(".rose");
 
-const PARTICLES_COUNT = 90;
-const PETALS_COUNT = 22;
+// =========================================
+// Create Floating Particles
+// =========================================
 
-function random(min, max) {
-  return Math.random() * (max - min) + min;
-}
+function createParticle() {
+    const particle = document.createElement("div");
 
-function createLightParticles() {
-  for (let i = 0; i < PARTICLES_COUNT; i++) {
-    const particle = document.createElement("span");
+    particle.classList.add("particle");
 
-    particle.className = "light-particle";
-    particle.style.left = `${random(0, 100)}%`;
-    particle.style.top = `${random(0, 100)}%`;
-    particle.style.animationDuration = `${random(5, 14)}s`;
-    particle.style.animationDelay = `${random(0, 8)}s`;
-    particle.style.opacity = random(0.2, 0.9);
+    const size = Math.random() * 8 + 3;
+
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    particle.style.left = `${Math.random() * 100}%`;
+
+    particle.style.animationDuration =
+        `${Math.random() * 8 + 8}s`;
+
+    particle.style.animationDelay =
+        `${Math.random() * 3}s`;
+
+    particle.style.opacity =
+        Math.random() * 0.8 + 0.2;
 
     particlesContainer.appendChild(particle);
-  }
+
+    setTimeout(() => {
+        particle.remove();
+    }, 18000);
 }
 
-function createFallingPetals() {
-  for (let i = 0; i < PETALS_COUNT; i++) {
-    const petal = document.createElement("span");
+setInterval(createParticle, 250);
 
-    petal.className = "falling-petal";
-    petal.style.left = `${random(0, 100)}%`;
-    petal.style.animationDuration = `${random(7, 16)}s`;
-    petal.style.animationDelay = `${random(0, 12)}s`;
-    petal.style.transform = `rotate(${random(0, 360)}deg)`;
+// =========================================
+// Falling Petals
+// =========================================
+
+function createPetal() {
+
+    const petal = document.createElement("div");
+
+    petal.style.position = "absolute";
+    petal.style.top = "-50px";
+
+    petal.style.left =
+        `${Math.random() * window.innerWidth}px`;
+
+    petal.style.width = "18px";
+    petal.style.height = "28px";
+
+    petal.style.borderRadius =
+        "70% 30% 70% 30%";
+
+    const colors = [
+        "#ff4f7b",
+        "#ff7fa4",
+        "#ffbfd1",
+        "#ffd6e2"
+    ];
+
+    petal.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    petal.style.pointerEvents = "none";
+    petal.style.zIndex = "999";
 
     document.body.appendChild(petal);
-  }
+
+    let x =
+        parseFloat(petal.style.left);
+
+    let y = -50;
+
+    const speed =
+        Math.random() * 1.8 + 1;
+
+    const drift =
+        Math.random() * 2 - 1;
+
+    const rotation =
+        Math.random() * 360;
+
+    let angle = rotation;
+
+    const fall = setInterval(() => {
+
+        y += speed;
+        x += drift;
+
+        angle += 2;
+
+        petal.style.top = `${y}px`;
+        petal.style.left = `${x}px`;
+
+        petal.style.transform =
+            `rotate(${angle}deg)`;
+
+        if (y > window.innerHeight + 50) {
+            clearInterval(fall);
+            petal.remove();
+        }
+
+    }, 16);
 }
 
-function mouseWindEffect(event) {
-  const x = event.clientX / window.innerWidth - 0.5;
-  const y = event.clientY / window.innerHeight - 0.5;
+setInterval(createPetal, 1400);
 
-  flowers.forEach((flower, index) => {
-    const power = (index + 1) * 5;
+// =========================================
+// Bloom Animation
+// =========================================
 
-    flower.style.transform = `
-      rotate(${x * power}deg)
-      translateY(${y * 10}px)
-    `;
-  });
+function bloomGarden() {
 
-  roses.forEach((rose, index) => {
-    const move = (index + 1) * 6;
+    roses.forEach((rose, index) => {
 
-    rose.style.filter = `
-      drop-shadow(${x * move}px ${y * move}px 22px rgba(255,120,170,.55))
-    `;
-  });
+        rose.style.transition =
+            "transform 1.5s ease";
+
+        rose.style.transform =
+            "scale(0.2)";
+
+        setTimeout(() => {
+
+            rose.style.transform =
+                "scale(1)";
+
+        }, 200 + index * 250);
+
+    });
+
 }
 
-function resetWindEffect() {
-  flowers.forEach((flower) => {
-    flower.style.transform = "";
-  });
+bloomBtn.addEventListener(
+    "click",
+    bloomGarden
+);
 
-  roses.forEach((rose) => {
-    rose.style.filter = "";
-  });
+// =========================================
+// Night Mode
+// =========================================
+
+let nightMode = false;
+
+nightBtn.addEventListener("click", () => {
+
+    nightMode = !nightMode;
+
+    scene.classList.toggle("night");
+
+    if (nightMode) {
+
+        document.body.style.background =
+            "#02030a";
+
+        nightBtn.textContent =
+            "Day Mode";
+
+    } else {
+
+        document.body.style.background =
+            "#07090d";
+
+        nightBtn.textContent =
+            "Night Glow";
+    }
+
+});
+
+// =========================================
+// Mouse Parallax Effect
+// =========================================
+
+document.addEventListener("mousemove", e => {
+
+    const mouseX =
+        e.clientX / window.innerWidth - 0.5;
+
+    const mouseY =
+        e.clientY / window.innerHeight - 0.5;
+
+    roses.forEach((rose, index) => {
+
+        const depth =
+            Number(
+                rose.dataset.depth || 1
+            );
+
+        const moveX =
+            mouseX * 20 * depth;
+
+        const moveY =
+            mouseY * 10 * depth;
+
+        rose.style.transform =
+            `translate(${moveX}px, ${moveY}px)`;
+
+    });
+
+});
+
+// =========================================
+// Random Wind Gusts
+// =========================================
+
+function windEffect() {
+
+    roses.forEach((rose, index) => {
+
+        const wind =
+            (Math.random() * 8) - 4;
+
+        rose.animate(
+
+            [
+                {
+                    transform:
+                        `rotate(0deg)`
+                },
+
+                {
+                    transform:
+                        `rotate(${wind}deg)`
+                },
+
+                {
+                    transform:
+                        `rotate(0deg)`
+                }
+
+            ],
+
+            {
+                duration: 2500,
+                easing: "ease-in-out"
+            }
+
+        );
+
+    });
+
 }
 
-function bloomEffect() {
-  roses.forEach((rose, index) => {
+setInterval(
+    windEffect,
+    5000
+);
+
+// =========================================
+// Automatic Bloom Every 20 Seconds
+// =========================================
+
+setInterval(() => {
+    bloomGarden();
+}, 20000);
+
+// =========================================
+// Sparkle Effect
+// =========================================
+
+function createSparkle() {
+
+    const sparkle =
+        document.createElement("div");
+
+    sparkle.style.position = "absolute";
+
+    sparkle.style.width = "4px";
+    sparkle.style.height = "4px";
+
+    sparkle.style.borderRadius = "50%";
+
+    sparkle.style.background =
+        "white";
+
+    sparkle.style.boxShadow =
+        "0 0 15px white";
+
+    sparkle.style.left =
+        `${Math.random() * window.innerWidth}px`;
+
+    sparkle.style.top =
+        `${Math.random() * window.innerHeight}px`;
+
+    sparkle.style.opacity = "0";
+
+    document.body.appendChild(
+        sparkle
+    );
+
+    sparkle.animate(
+
+        [
+            {
+                opacity: 0,
+                transform:
+                    "scale(0)"
+            },
+
+            {
+                opacity: 1,
+                transform:
+                    "scale(2)"
+            },
+
+            {
+                opacity: 0,
+                transform:
+                    "scale(0)"
+            }
+
+        ],
+
+        {
+            duration:
+                Math.random() * 2000 + 1000
+        }
+
+    );
+
     setTimeout(() => {
-      rose.classList.add("bloom");
-    }, index * 400);
-  });
+        sparkle.remove();
+    }, 3000);
 }
 
-function addTouchGlow() {
-  roses.forEach((rose) => {
-    rose.addEventListener("mouseenter", () => {
-      rose.classList.add("rose-active");
-    });
+setInterval(
+    createSparkle,
+    300
+);
 
-    rose.addEventListener("mouseleave", () => {
-      rose.classList.remove("rose-active");
-    });
+// =========================================
+// Initial Startup Animation
+// =========================================
 
-    rose.addEventListener("touchstart", () => {
-      rose.classList.add("rose-active");
+window.addEventListener(
+    "load",
+    () => {
 
-      setTimeout(() => {
-        rose.classList.remove("rose-active");
-      }, 800);
-    });
-  });
-}
+        bloomGarden();
 
-createLightParticles();
-createFallingPetals();
-bloomEffect();
-addTouchGlow();
+        for (let i = 0; i < 30; i++) {
 
-window.addEventListener("mousemove", mouseWindEffect);
-window.addEventListener("mouseleave", resetWindEffect);
+            setTimeout(() => {
+
+                createParticle();
+
+            }, i * 100);
+
+        }
+
+    }
+);
+
+// =========================================
+// Responsive Repositioning
+// =========================================
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        document
+            .querySelectorAll(".particle")
+            .forEach(el => el.remove());
+
+    }
+);
+
+// =========================================
+// Easter Egg
+// Double Click Anywhere
+// =========================================
+
+document.addEventListener(
+    "dblclick",
+    () => {
+
+        for (let i = 0; i < 25; i++) {
+
+            setTimeout(() => {
+
+                createPetal();
+
+            }, i * 80);
+
+        }
+
+    }
+);
+
+console.log(
+    "🌹 Realistic Rose Garden Loaded Successfully"
+);
