@@ -2,82 +2,201 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realistic Animated Flower Garden</title>
+
+  <title>Realistic Animated Rose Garden</title>
+
+  <meta
+    name="description"
+    content="A realistic animated rose garden made with HTML, CSS and JavaScript."
+  />
 
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <main class="scene">
-    <div class="sky-glow"></div>
+<body>
+  <main class="scene" id="scene">
+
+    <!-- Background Glow -->
+    <div class="background">
+      <div class="moon-glow"></div>
+      <div class="mist mist-1"></div>
+      <div class="mist mist-2"></div>
+      <div class="mist mist-3"></div>
+    </div>
+
+    <!-- Floating particles container -->
     <div class="particles" id="particles"></div>
 
-    <section class="garden" aria-label="Animated realistic flower garden">
+    <!-- Main title -->
+    <section class="intro">
+      <p class="small-title">HTML • CSS • JavaScript</p>
+      <h1>Realistic Rose Garden</h1>
+      <p class="subtitle">
+        Animated flowers with natural movement, glowing atmosphere and soft petals.
+      </p>
+    </section>
 
-      <div class="flower flower-big">
+    <!-- Garden ground -->
+    <section class="garden" id="garden">
+
+      <!-- Rose 1 -->
+      <article class="rose rose-main rose-red" data-depth="1.1">
+        <div class="flower-head">
+          <span class="petal petal-1"></span>
+          <span class="petal petal-2"></span>
+          <span class="petal petal-3"></span>
+          <span class="petal petal-4"></span>
+          <span class="petal petal-5"></span>
+          <span class="petal petal-6"></span>
+          <span class="petal petal-7"></span>
+          <span class="petal petal-8"></span>
+          <span class="petal petal-9"></span>
+          <span class="petal petal-10"></span>
+          <span class="petal petal-11"></span>
+          <span class="petal petal-12"></span>
+          <span class="flower-core"></span>
+        </div>
+
         <div class="stem">
-          <span class="leaf leaf-left"></span>
-          <span class="leaf leaf-right"></span>
+          <span class="thorn thorn-1"></span>
+          <span class="thorn thorn-2"></span>
+          <span class="thorn thorn-3"></span>
         </div>
 
-        <div class="rose">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="petal p6"></span>
-          <span class="petal p7"></span>
-          <span class="petal p8"></span>
-          <span class="center"></span>
+        <div class="leaf leaf-left leaf-1">
+          <span class="leaf-line"></span>
         </div>
-      </div>
 
-      <div class="flower flower-medium">
+        <div class="leaf leaf-right leaf-2">
+          <span class="leaf-line"></span>
+        </div>
+
+        <div class="leaf leaf-left leaf-3">
+          <span class="leaf-line"></span>
+        </div>
+      </article>
+
+      <!-- Rose 2 -->
+      <article class="rose rose-side rose-pink" data-depth="0.8">
+        <div class="flower-head">
+          <span class="petal petal-1"></span>
+          <span class="petal petal-2"></span>
+          <span class="petal petal-3"></span>
+          <span class="petal petal-4"></span>
+          <span class="petal petal-5"></span>
+          <span class="petal petal-6"></span>
+          <span class="petal petal-7"></span>
+          <span class="petal petal-8"></span>
+          <span class="petal petal-9"></span>
+          <span class="petal petal-10"></span>
+          <span class="flower-core"></span>
+        </div>
+
         <div class="stem">
-          <span class="leaf leaf-left"></span>
-          <span class="leaf leaf-right"></span>
+          <span class="thorn thorn-1"></span>
+          <span class="thorn thorn-2"></span>
         </div>
 
-        <div class="rose rose-pink">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="petal p6"></span>
-          <span class="petal p7"></span>
-          <span class="petal p8"></span>
-          <span class="center"></span>
+        <div class="leaf leaf-left leaf-1">
+          <span class="leaf-line"></span>
         </div>
-      </div>
 
-      <div class="flower flower-small">
+        <div class="leaf leaf-right leaf-2">
+          <span class="leaf-line"></span>
+        </div>
+      </article>
+
+      <!-- Rose 3 -->
+      <article class="rose rose-small rose-white" data-depth="0.6">
+        <div class="flower-head">
+          <span class="petal petal-1"></span>
+          <span class="petal petal-2"></span>
+          <span class="petal petal-3"></span>
+          <span class="petal petal-4"></span>
+          <span class="petal petal-5"></span>
+          <span class="petal petal-6"></span>
+          <span class="petal petal-7"></span>
+          <span class="petal petal-8"></span>
+          <span class="flower-core"></span>
+        </div>
+
         <div class="stem">
-          <span class="leaf leaf-left"></span>
-          <span class="leaf leaf-right"></span>
+          <span class="thorn thorn-1"></span>
         </div>
 
-        <div class="rose rose-gold">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="petal p6"></span>
-          <span class="petal p7"></span>
-          <span class="petal p8"></span>
-          <span class="center"></span>
+        <div class="leaf leaf-left leaf-1">
+          <span class="leaf-line"></span>
         </div>
-      </div>
 
-      <div class="grass">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
+        <div class="leaf leaf-right leaf-2">
+          <span class="leaf-line"></span>
+        </div>
+      </article>
+
+      <!-- Rose 4 -->
+      <article class="rose rose-yellow" data-depth="0.7">
+        <div class="flower-head">
+          <span class="petal petal-1"></span>
+          <span class="petal petal-2"></span>
+          <span class="petal petal-3"></span>
+          <span class="petal petal-4"></span>
+          <span class="petal petal-5"></span>
+          <span class="petal petal-6"></span>
+          <span class="petal petal-7"></span>
+          <span class="petal petal-8"></span>
+          <span class="petal petal-9"></span>
+          <span class="flower-core"></span>
+        </div>
+
+        <div class="stem">
+          <span class="thorn thorn-1"></span>
+          <span class="thorn thorn-2"></span>
+        </div>
+
+        <div class="leaf leaf-left leaf-1">
+          <span class="leaf-line"></span>
+        </div>
+
+        <div class="leaf leaf-right leaf-2">
+          <span class="leaf-line"></span>
+        </div>
+      </article>
+
+      <!-- Decorative grasses -->
+      <div class="grass grass-1"></div>
+      <div class="grass grass-2"></div>
+      <div class="grass grass-3"></div>
+      <div class="grass grass-4"></div>
+      <div class="grass grass-5"></div>
+      <div class="grass grass-6"></div>
+      <div class="grass grass-7"></div>
+      <div class="grass grass-8"></div>
+      <div class="grass grass-9"></div>
+      <div class="grass grass-10"></div>
+
+      <!-- Fallen petals -->
+      <span class="fallen-petal fallen-1"></span>
+      <span class="fallen-petal fallen-2"></span>
+      <span class="fallen-petal fallen-3"></span>
+      <span class="fallen-petal fallen-4"></span>
+      <span class="fallen-petal fallen-5"></span>
+      <span class="fallen-petal fallen-6"></span>
 
     </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <button class="control-btn" id="bloomBtn" type="button">
+        Bloom Again
+      </button>
+
+      <button class="control-btn secondary" id="nightBtn" type="button">
+        Night Glow
+      </button>
+    </section>
+
   </main>
 
   <script src="script.js"></script>
