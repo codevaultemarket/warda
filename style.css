@@ -1,0 +1,255 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at top,#243b55 0%,#141e30 40%,#05060a 100%);
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    font-family:Arial,sans-serif;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+}
+
+.sky-glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,.08);
+    filter:blur(100px);
+}
+
+.garden{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:120px;
+    padding-bottom:120px;
+}
+
+.flower{
+    position:relative;
+    animation:sway 6s ease-in-out infinite;
+    transform-origin:bottom center;
+}
+
+.flower-medium{
+    animation-delay:-2s;
+}
+
+.flower-small{
+    animation-delay:-4s;
+}
+
+.stem{
+    width:14px;
+    height:280px;
+    background:linear-gradient(
+    to right,
+    #0c4f22,
+    #34a853,
+    #0c4f22);
+    border-radius:20px;
+    margin:auto;
+    position:relative;
+}
+
+.leaf{
+    position:absolute;
+    width:80px;
+    height:40px;
+    background:linear-gradient(
+    135deg,
+    #47d36f,
+    #0e6f2f);
+    border-radius:100% 0;
+}
+
+.leaf-left{
+    left:-65px;
+    top:90px;
+    transform:rotate(-40deg);
+}
+
+.leaf-right{
+    right:-65px;
+    top:160px;
+    transform:scaleX(-1) rotate(-40deg);
+}
+
+.rose{
+    position:absolute;
+    bottom:250px;
+    left:50%;
+    transform:translateX(-50%);
+    width:170px;
+    height:170px;
+}
+
+.rose-pink .petal{
+    background:linear-gradient(
+    145deg,
+    #ff91b8,
+    #ff2d75);
+}
+
+.rose-gold .petal{
+    background:linear-gradient(
+    145deg,
+    #ffd66b,
+    #ff9f1a);
+}
+
+.petal{
+    position:absolute;
+    width:90px;
+    height:90px;
+    background:linear-gradient(
+    145deg,
+    #ff5f7a,
+    #d1003f);
+    border-radius:70% 30% 70% 30%;
+    box-shadow:
+    inset 0 0 15px rgba(255,255,255,.4),
+    0 0 20px rgba(255,0,80,.25);
+}
+
+.p1{
+    top:0;
+    left:40px;
+}
+
+.p2{
+    top:25px;
+    left:0;
+    transform:rotate(-45deg);
+}
+
+.p3{
+    top:25px;
+    right:0;
+    transform:rotate(45deg);
+}
+
+.p4{
+    top:65px;
+    left:15px;
+    transform:rotate(-90deg);
+}
+
+.p5{
+    top:65px;
+    right:15px;
+    transform:rotate(90deg);
+}
+
+.p6{
+    bottom:0;
+    left:40px;
+    transform:rotate(180deg);
+}
+
+.p7{
+    top:45px;
+    left:40px;
+    transform:scale(.8);
+}
+
+.p8{
+    top:55px;
+    left:50px;
+    transform:scale(.6);
+}
+
+.center{
+    position:absolute;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#ffe082;
+    top:62px;
+    left:62px;
+    box-shadow:
+    0 0 20px gold,
+    0 0 40px gold;
+}
+
+.flower-big .rose{
+    transform:translateX(-50%) scale(1.2);
+}
+
+.flower-small .rose{
+    transform:translateX(-50%) scale(.85);
+}
+
+.grass{
+    position:absolute;
+    width:100%;
+    bottom:0;
+    height:150px;
+}
+
+.grass span{
+    position:absolute;
+    bottom:0;
+    width:4px;
+    height:120px;
+    background:#1b8d39;
+    border-radius:20px;
+    transform-origin:bottom;
+    animation:grassMove 4s ease-in-out infinite;
+}
+
+.grass span:nth-child(1){left:5%;}
+.grass span:nth-child(2){left:15%;}
+.grass span:nth-child(3){left:25%;}
+.grass span:nth-child(4){left:35%;}
+.grass span:nth-child(5){left:45%;}
+.grass span:nth-child(6){left:55%;}
+.grass span:nth-child(7){left:65%;}
+.grass span:nth-child(8){left:75%;}
+.grass span:nth-child(9){left:85%;}
+.grass span:nth-child(10){left:95%;}
+
+@keyframes sway{
+    0%{
+        transform:rotate(-3deg);
+    }
+    50%{
+        transform:rotate(3deg);
+    }
+    100%{
+        transform:rotate(-3deg);
+    }
+}
+
+@keyframes grassMove{
+    0%{
+        transform:rotate(-8deg);
+    }
+    50%{
+        transform:rotate(8deg);
+    }
+    100%{
+        transform:rotate(-8deg);
+    }
+}
